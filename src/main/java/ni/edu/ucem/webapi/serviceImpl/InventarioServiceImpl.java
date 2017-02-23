@@ -156,4 +156,14 @@ public class InventarioServiceImpl implements InventarioService
         }
         return new Pagina<CategoriaCuarto>(categoriaCuarto, count,  paginacion.getOffset(), paginacion.getLimit());
     }
+    
+    @Transactional
+    public void guardarCategoria(final CategoriaCuarto pCategoria) 
+    {
+        if(pCategoria.getId() < 1)
+        {
+            throw new IllegalArgumentException("la categoria no existe");
+        }
+        this.categoriaCuartoDAO.guardar(pCategoria);
+    }
 }
