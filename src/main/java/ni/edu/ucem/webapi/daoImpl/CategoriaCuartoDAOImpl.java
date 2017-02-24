@@ -89,8 +89,9 @@ public class CategoriaCuartoDAOImpl implements CategoriaCuartoDAO
 
     @Override
     public List<CategoriaCuarto> obtenerTodos(int offset, int limit) {
-      String sql = "select * from categoria_cuarto";
-        return this.jdbcTemplate.query(sql, new BeanPropertyRowMapper<CategoriaCuarto>(CategoriaCuarto.class));
+      String sql = "select * from categoria_cuarto offset ? limit ?";
+        return this.jdbcTemplate.query(sql, new Object[]{offset, limit},
+                new BeanPropertyRowMapper<CategoriaCuarto>(CategoriaCuarto.class));
     }
 
 }

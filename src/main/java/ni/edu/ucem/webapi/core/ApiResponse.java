@@ -1,5 +1,6 @@
 package ni.edu.ucem.webapi.core;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
@@ -7,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * See {@linktourl https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html}
  * @author fmedina
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonInclude(Include.NON_NULL)
 public class ApiResponse
 {
 

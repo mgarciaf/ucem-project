@@ -6,32 +6,38 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 public class Cuarto 
 {
     private Integer id;
     
-    @NotNull(message="Número de Cuarto Requerido")
-    @Range(min=1, max=Short.MAX_VALUE)
+    @NotNull(message = "El numero de cuarto es requerido")
+    @Range(min = 1, max = Short.MAX_VALUE)
     private Short  numero;
     
-    @NotBlank(message="La descripcion es requerida")
-    @Pattern(regexp="^[\\w ]+$")
+    @NotNull
+    @NotEmpty(message = "La descripcion es requerida.")
+    @Pattern(regexp = "^[\\w ]+$")
     private String descripcion;
     
-    @NotNull(message = "Categoria requerido")
-    @Min(1)
+    @NotNull(message = "La categoria del cuarto es requerida.")
+    @Range(min = 1, max = 1000)
     private Integer categoria;
     
-    private Date fecha = new Date();
-    
-    public Cuarto(){}
+    private Date modificado;
+     
+    //private Date fecha = new Date();
     
     public Cuarto(final Short numero, final String descripcion, final Integer categoria) {
         this.numero = numero;
         this.descripcion = descripcion;
         this.categoria = categoria;
+    }
+    
+    public Cuarto(){
+        
     }
 
     public Cuarto(final Integer id, final Short numero, final String descripcion,
@@ -66,11 +72,20 @@ public class Cuarto
     }
     public void setCategoria(final Integer categoria) {
         this.categoria = categoria;
-    }        
-    public void setFecha(Date fecha) {
+    }   
+    
+    public Date getModificado() {
+      return modificado;
+    }
+    
+    public void setModificado(Date modificado) {
+      this.modificado = modificado;
+    }
+    
+    /*public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-    public Date getFecha() {
+    }*/
+    /*public Date getFecha() {
         return fecha;
-    }
+    }*/
 }

@@ -6,21 +6,25 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class CategoriaCuarto 
 {
     private Integer id;
     
-    @NotNull(message= "Nombre de Categoria Requerido")
+    @NotNull
+    @NotEmpty(message= "Nombre de Categoria Requerido")
     @Pattern(regexp="^[\\w ]+$")
     private String nombre;
     
-    @NotBlank(message="La descripcion es requerida")
-    @Pattern(regexp="^[\\w ]+$")
+    @NotNull
+    @NotEmpty(message="La descripcion es requerida")
+    @Pattern(regexp = "^[\\w ]+$")
     private String descripcion;
     
     @NotNull(message="Precio de categoria Requerido")
-    @Min(1)
+    //Expresion regular para entero
+    //@Pattern(regexp = "[\\d ]+$")
     private BigDecimal precio;
     
     private Date fecha = new Date();

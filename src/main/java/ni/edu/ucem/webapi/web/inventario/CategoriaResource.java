@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.validation.Valid;
 import ni.edu.ucem.webapi.core.ApiResponse;
 import ni.edu.ucem.webapi.core.ApiResponse.Status;
 import ni.edu.ucem.webapi.core.ListApiResponse;
@@ -16,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,8 +62,12 @@ public class CategoriaResource
     @RequestMapping(method = RequestMethod.POST,
             produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public ApiResponse guardarCategoria(@RequestBody final CategoriaCuarto categoria) 
+    public ApiResponse guardarCategoria(@Valid @RequestBody final CategoriaCuarto categoria, BindingResult result) 
     {
+        if(result.hasErrors())
+        {
+            throw new IllegalArgumentException(result.getFieldError().getDefaultMessage());
+        }
         this.categoriaService.agregarCategoriaCuarto(categoria);
         return new ApiResponse(Status.OK, categoria);
     }

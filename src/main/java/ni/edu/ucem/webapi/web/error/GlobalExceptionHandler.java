@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
- * @author Arlette Roger
+ * @author mgarciaf
  */
 
 @RestController
@@ -33,5 +33,11 @@ public class GlobalExceptionHandler {
                new ApiError(Status.BAD_REQUEST.getValue(), e.getMessage().toString()));
     }
     
-    
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ApiResponse manejarArgumentoInvalido(Exception e)
+    {
+        return new ApiResponse(Status.BAD_REQUEST,null, new ApiError(Status.BAD_REQUEST.getValue(), 
+                e.getMessage().toString()));
+    }
 }

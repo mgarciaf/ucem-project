@@ -1,9 +1,3 @@
-
-/**
- *
- * @author Arlette Roger
- */
-
 package ni.edu.ucem.webapi.modelo;
 
 import java.util.List;

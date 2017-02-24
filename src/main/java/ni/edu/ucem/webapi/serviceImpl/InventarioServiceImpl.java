@@ -39,7 +39,7 @@ public class InventarioServiceImpl implements InventarioService
     {
         if(pCategoriaCuarto.getId() < 1)
         {
-            throw new IllegalArgumentException("La categoría del cuarto no existe");
+            throw new IllegalArgumentException("La categoria del cuarto no existe");
         }
         this.categoriaCuartoDAO.guardar(pCategoriaCuarto);
     }

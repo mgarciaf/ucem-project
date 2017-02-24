@@ -7,11 +7,11 @@
   <version>1.0-SNAPSHOT</version>
   <name>hotel-web-api</name>
   <!-- Parent pom, provee manejo de dependencias y plugins. Cualquier cambio 
-         de versiÃ³n se verÃ¡ reflejado en todos los poms que ereden de Ã©l. -->
+         de versión se verá reflejado en todos los poms que ereden de él. -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.3.RELEASE</version>
+        <version>1.5.1.RELEASE</version>
     </parent>
     <dependencies>
         <dependency>
@@ -20,10 +20,15 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+          <scope>provided</scope>
+      </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <dependency>
+         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
@@ -31,11 +36,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
-        </dependency>
-         <dependency>
-           <groupId>org.apache.httpcomponents</groupId>
-           <artifactId>httpcore</artifactId>
-           <version>4.4.5</version>
         </dependency>
         <dependency>
            <groupId>junit</groupId>
@@ -45,8 +45,8 @@
     </dependencies>
     <build>
         <plugins>
-            <!-- El plugin permite enpaquetar la aplicaciÃ³n en un jar ejecutable o 
-                 un war, y correr la aplicaciÃ³n. -->
+            <!-- El plugin permite enpaquetar la aplicación en un jar ejecutable o 
+                 un war, y correr la aplicación. -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

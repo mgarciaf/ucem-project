@@ -1,5 +1,8 @@
 package ni.edu.ucem.webapi.daoImpl;
 
+import static com.oracle.jrockit.jfr.ContentType.Timestamp;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +32,6 @@ public class CuartoDAOImpl implements CuartoDAO
                 new BeanPropertyRowMapper<Cuarto>(Cuarto.class));
     }
     
-    
     @Override
     public int contar()
     {
@@ -47,15 +49,15 @@ public class CuartoDAOImpl implements CuartoDAO
     @Override
     public List<Cuarto> obtenerTodos(final int pOffset, final int pLimit) 
     {
-        String sql = "select * from cuarto";
-        return this.jdbcTemplate.query(sql, 
+        String sql = "select * from cuarto offset ? limit ?";
+        return this.jdbcTemplate.query(sql, new Object[]{pOffset, pLimit},
                 new BeanPropertyRowMapper<Cuarto>(Cuarto.class));
     }
 
     @Override
     public List<Cuarto> obtenerTodosPorCategoriaId(int pCategoriaId, int pOffset, int pLimit) 
     {
-        final String sql = "select * from cuarto where categoria = ?";
+        final String sql = "select * from cuarto where categoria = ? offset ? limit ?";
         return this.jdbcTemplate.query(sql, new Object[]{pCategoriaId, pOffset, pLimit},
                 new BeanPropertyRowMapper<Cuarto>(Cuarto.class));
     }
@@ -87,14 +89,16 @@ public class CuartoDAOImpl implements CuartoDAO
                 .append("set numero = ?")
                 .append(",descripcion = ?")
                 .append(",categoria = ?")
+                .append(", modificado = ?")
                 .append(" ")
                 .append("where id = ?")
                 .toString();
-        final Object[] parametros = new Object[4];
+        final Object[] parametros = new Object[5];
         parametros[0] = pCuarto.getNumero();
         parametros[1] = pCuarto.getDescripcion();
         parametros[2] = pCuarto.getCategoria();
-        parametros[3] = pCuarto.getId();
+        parametros[3] = new Timestamp (new Date().getTime());
+        parametros[4] = pCuarto.getId();
         this.jdbcTemplate.update(sql,parametros);
     }
 
@@ -104,5 +108,4 @@ public class CuartoDAOImpl implements CuartoDAO
         final String sql = "delete from cuarto where id = ?";
         this.jdbcTemplate.update(sql, new Object[]{pId});
     }
-
 }
