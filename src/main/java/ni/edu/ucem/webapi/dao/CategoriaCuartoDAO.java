@@ -6,7 +6,7 @@ import ni.edu.ucem.webapi.modelo.CategoriaCuarto;
 
 public interface CategoriaCuartoDAO 
 {
-     public int contar();
+    public int contar();
      
     public CategoriaCuarto obtenerPorId(final int pId);
 

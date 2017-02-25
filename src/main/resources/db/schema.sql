@@ -33,7 +33,15 @@ CREATE TABLE recibo(
   reservacion INT NOT NULL
 );
 
+CREATE TABLE cupo(
+  id IDENTITY PRIMARY KEY,
+  fecha_ingreso TIMESTAMP NOT NULL,
+  fecha_salida TIMESTAMP NOT NULL,
+  categoria INT NOT NULL
+);
+
 ALTER TABLE cuarto ADD FOREIGN KEY ( categoria ) REFERENCES categoria_cuarto( id );
 ALTER TABLE reservacion ADD FOREIGN KEY ( cuarto ) REFERENCES cuarto( id );
 ALTER TABLE reservacion ADD FOREIGN KEY ( huesped ) REFERENCES huesped( id );
 ALTER TABLE recibo ADD FOREIGN KEY ( reservacion ) REFERENCES reservacion ( id );
+ALTER TABLE cupo ADD FOREIGN KEY ( categoria ) REFERENCES categoria_cuarto( id );
