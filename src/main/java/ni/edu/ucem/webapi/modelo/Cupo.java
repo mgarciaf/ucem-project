@@ -12,12 +12,10 @@ public class Cupo {
     
    @NotNull
    @NotEmpty(message= "La fecha de ingreso es Requerida")
-   //@Pattern(regexp="\\d{4}-\\d{2}-\\d{2}")
    private Timestamp fechaIngreso;
    
    @NotNull
    @NotEmpty(message= "La fecha de salida es Requerida")
-   //@Pattern(regexp="\\d{4}-\\d{2}-\\d{2}")
    private Timestamp fechaSalida;
    
    @NotNull(message = "La categoria es Requerida.")

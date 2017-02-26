@@ -20,6 +20,13 @@ public class CupoDAOImpl implements CupoDAO
   {
     this.jdbcTemplate = jdbcTemplate;
   }
+  
+    public Cupo obtenerPorId(final int pId) 
+    {
+        String sql = "select * from cupo where id = ?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{pId}, 
+                new BeanPropertyRowMapper<Cupo>(Cupo.class));
+    }
 
     @Override
     public List<Cupo> obtenerTodos(final int pOffset, final int pLimit) {
@@ -33,5 +40,37 @@ public class CupoDAOImpl implements CupoDAO
     {
         final String sql = "select count(*) from cupo";
         return this.jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+    
+    @Override
+    public int contarPorCategoria(final int categoriaId)
+    {
+        final String sql = "select count(*) from cupo";
+        return this.jdbcTemplate.queryForObject(sql, Integer.class);
+    }
+    
+    @Override
+    public List<Cupo> obtenerTodosPorCategoriaId(int pCategoriaId, int pOffset, int pLimit) 
+    {
+        final String sql = "select * from cupo where categoria = ? offset ? limit ?";
+        return this.jdbcTemplate.query(sql, new Object[]{pCategoriaId, pOffset, pLimit},
+                new BeanPropertyRowMapper<Cupo>(Cupo.class));
+    }
+    
+    @Override
+    public void agregar(final Cupo pCupo) 
+    {
+        final String sql = new StringBuilder()
+                .append("INSERT INTO cupo")
+                .append(" ")
+                .append("(fecha_ingreso, fecha_salida, categoria)")
+                .append(" ")
+                .append("VALUES(?,?,?)")
+                .toString();
+        final Object[] parametros = new Object[3];
+        parametros[0] = pCupo.getFechaIngreso();
+        parametros[1] = pCupo.getFechaSalida();
+        parametros[2] = pCupo.getCategoria();
+        this.jdbcTemplate.update(sql,parametros);
     }
 }

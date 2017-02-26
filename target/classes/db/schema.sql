@@ -21,8 +21,8 @@ CREATE TABLE huesped(
 
 CREATE TABLE reservacion(
   id IDENTITY PRIMARY KEY,
-  desde DATE NOT NULL,
-  hasta DATE NOT NULL,
+  desde DATETIME NOT NULL,
+  hasta DATETIME NOT NULL,
   cuarto INT NOT NULL,
   huesped INT NOT NULL
 );
