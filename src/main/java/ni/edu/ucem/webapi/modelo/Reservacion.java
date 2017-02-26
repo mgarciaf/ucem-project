@@ -3,6 +3,7 @@ package ni.edu.ucem.webapi.modelo;
 
 import java.sql.Date;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
